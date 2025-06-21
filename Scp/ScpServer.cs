@@ -96,7 +96,7 @@ public class ScpServer
         {
             string log = (Regex.Replace(message.ToString(), @"(?:.*?(\| )+){2}.*?((\| )+)", ""));
             _bot.Messages.Add(new KeyValuePair<ulong, string>(Program.Config.Channels[_bot.ServerNumber].ServerLog, log));
-            Program.Database.Logs.Add(new KeyValuePair<byte, string>(_bot.ServerNumber, log));
+            if(Program.Config.Database.Enabled) Program.Database.Logs.Add(new KeyValuePair<byte, string>(_bot.ServerNumber, log));
             return;
         };
 
