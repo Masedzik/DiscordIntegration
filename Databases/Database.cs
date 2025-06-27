@@ -33,10 +33,26 @@ public class Database
             Connection.Open();
             MySqlCommand users = Connection.CreateCommand();
             users.CommandText = 
-                "CREATE TABLE IF NOT EXISTS logs (" +
-                "server TINYINT UNSIGNED NOT NULL," +
-                "timestamp TIMESTAMP NOT NULL," +
-                "log VARCHAR(1024) NOT NULL);";
+                "CREATE TABLE IF NOT EXISTS logs " +
+                    "(server TINYINT UNSIGNED NOT NULL," +
+                    "timestamp DATETIME NOT NULL," +
+                    "log VARCHAR(1024) NOT NULL," +
+                    "INDEX time_index(timestamp)" +
+                ")" +
+                "PARTITION BY LIST(MONTH(timestamp))(" +
+                    "PARTITION p1 VALUES IN(1)," +
+                    "PARTITION p2 VALUES IN(2)," +
+                    "PARTITION p3 VALUES IN(3)," +
+                    "PARTITION p4 VALUES IN(4)," +
+                    "PARTITION p5 VALUES IN(5)," +
+                    "PARTITION p6 VALUES IN(6)," +
+                    "PARTITION p7 VALUES IN(7)," +
+                    "PARTITION p8 VALUES IN(8)," +
+                    "PARTITION p9 VALUES IN(9)," +
+                    "PARTITION p10 VALUES IN(10)," +
+                    "PARTITION p11 VALUES IN(11)," +
+                    "PARTITION p12 VALUES IN(12)" +
+                ");";
             users.ExecuteNonQuery();
         }
         catch 
